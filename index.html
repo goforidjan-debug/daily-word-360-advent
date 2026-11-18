@@ -25,32 +25,34 @@
 
   /* ---------- Header ---------- */
   .hero{
-    background:linear-gradient(160deg, var(--green) 0%, #0a2e22 62%, #123f2c 100%);
+    background:linear-gradient(160deg, #17804b 0%, #0d3d26 62%, #14663a 100%);
     border-radius:28px; padding:30px 24px 26px; text-align:center; color:#fff;
     box-shadow:var(--shadow); position:relative; overflow:hidden;
   }
-  .hero::before,.hero::after{
-    content:""; position:absolute; border-radius:50%;
-    border:1px solid rgba(201,162,39,.35); pointer-events:none;
+  .hero .star{width:46px; height:46px; margin:0 auto 10px; display:block; filter:drop-shadow(0 0 12px rgba(255,211,77,.85));}
+  /* Gold corner art on the title card — nativity top-right, wise men bottom-left */
+  .hero .nativity{position:absolute; top:12px; right:14px; width:118px; height:auto; opacity:1; pointer-events:none; z-index:0;}
+  .hero .wisemen{position:absolute; bottom:10px; left:14px; width:150px; height:auto; opacity:.95; pointer-events:none; z-index:0;}
+  .hero>*:not(.nativity):not(.wisemen){position:relative; z-index:1;}
+  @media (max-width:480px){
+    .hero .nativity{width:76px; top:8px; right:8px; opacity:.8;}
+    .hero .wisemen{width:92px; bottom:6px; left:8px; opacity:.75;}
   }
-  .hero::before{width:340px; height:340px; top:-190px; right:-110px;}
-  .hero::after{width:260px; height:260px; bottom:-170px; left:-90px;}
-  .hero .star{width:46px; height:46px; margin:0 auto 10px; display:block; filter:drop-shadow(0 0 10px rgba(233,199,103,.7));}
   .hero .eyebrow{
     font-size:11px; letter-spacing:.32em; text-transform:uppercase;
-    color:var(--gold); font-weight:700; margin-bottom:10px;
+    color:#ffd34d; font-weight:700; margin-bottom:10px;
   }
   .hero h1{
     font-family:Georgia,"Times New Roman",serif; font-weight:700;
     font-size:clamp(28px,7.4vw,38px); line-height:1.12; letter-spacing:.01em;
   }
-  .hero h1 em{color:#e9c767; font-style:normal;}
-  .hero .rule{width:64px; height:2px; background:linear-gradient(90deg,transparent,var(--gold),transparent); margin:16px auto 12px;}
+  .hero h1 em{color:#ffd34d; font-style:normal;}
+  .hero .rule{width:64px; height:2px; background:linear-gradient(90deg,transparent,#ffd34d,transparent); margin:16px auto 12px;}
   .hero p{font-size:15px; line-height:1.55; color:#dcebe2; max-width:420px; margin:0 auto;}
   .count-pill{
     display:inline-flex; align-items:center; gap:8px; margin-top:18px;
-    background:rgba(255,255,255,.1); border:1px solid rgba(233,199,103,.45);
-    padding:9px 16px; border-radius:999px; font-size:14px; font-weight:600; color:#f3e3ac;
+    background:rgba(255,255,255,.1); border:1px solid rgba(255,211,77,.65);
+    padding:9px 16px; border-radius:999px; font-size:14px; font-weight:600; color:#ffe89a;
   }
   .count-pill svg{width:16px; height:16px; flex:none;}
 
@@ -204,7 +206,59 @@
 <div class="wrap">
 
   <header class="hero">
-    <svg class="star" viewBox="0 0 64 64" fill="#e9c767" aria-hidden="true">
+    <!-- Golden nativity scene, top-right corner -->
+    <svg class="nativity" viewBox="0 0 120 96" fill="none" stroke="#ffd34d" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="60" cy="13" r="14" fill="#ffd34d" opacity=".2" stroke="none"/>
+      <path d="M60 1 L63.2 9.8 L72 13 L63.2 16.2 L60 25 L56.8 16.2 L48 13 L56.8 9.8 Z" fill="#ffd34d" stroke="none"/>
+      <path d="M24 16 L25.2 19.4 L28.5 20.5 L25.2 21.6 L24 25 L22.8 21.6 L19.5 20.5 L22.8 19.4 Z" fill="#ffd34d" stroke="none" opacity=".7"/>
+      <path d="M96 14 L97.2 17.4 L100.5 18.5 L97.2 19.6 L96 23 L94.8 19.6 L91.5 18.5 L94.8 17.4 Z" fill="#ffd34d" stroke="none" opacity=".7"/>
+      <path d="M16 42 L60 28 L104 42"/>
+      <path d="M20 42 L20 80 M100 42 L100 80" opacity=".55"/>
+      <circle cx="36" cy="52" r="4.5"/>
+      <path d="M36 47 C29 49 25 57 25 68 C25 76 27 82 30 86"/>
+      <path d="M36 47 C42 50 45 58 45 68 C45 76 43 82 40 86"/>
+      <path d="M25 86 L47 86"/>
+      <path d="M44 64 L49 66"/>
+      <circle cx="84" cy="46" r="5"/>
+      <path d="M84 51 C81 60 81 72 83 86"/>
+      <path d="M84 51 C88 60 89 72 87 86"/>
+      <path d="M78 56 Q84 53 90 56"/>
+      <path d="M93 36 L93 86"/>
+      <path d="M93 36 Q97 31 100 35"/>
+      <path d="M50 66 L70 66 L67 78 L53 78 Z"/>
+      <path d="M54 78 L51 86 M66 78 L69 86"/>
+      <circle cx="60" cy="60" r="3.5"/>
+      <path d="M55 70 Q60 67 65 70"/>
+      <path d="M54 73 L58 71 M62 73 L66 71"/>
+      <path d="M12 88 L108 88"/>
+    </svg>
+    <!-- Golden three wise men with camels, bottom-left corner -->
+    <svg class="wisemen" viewBox="0 0 200 84" fill="none" stroke="#ffd34d" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <defs>
+        <g id="camel">
+          <path d="M8 44 Q8 32 20 30 Q24 20 32 20 Q40 20 42 28 Q54 30 56 38 Q56 44 48 44 L14 44 Z"/>
+          <path d="M52 34 Q60 26 58 16"/>
+          <path d="M58 16 Q56 10 60 8 L66 10 Q68 14 64 16 Q62 18 60 18"/>
+          <path d="M60 9 L58 5"/>
+          <path d="M14 44 L13 62 M22 44 L22 62 M40 44 L41 62 M48 44 L49 62"/>
+          <path d="M8 40 Q3 48 5 54"/>
+          <circle cx="32" cy="12" r="3.5"/>
+          <path d="M28.5 9.5 L30 5.5 L32 8.5 L34 5.5 L35.5 9.5" fill="#ffd34d" stroke="none"/>
+          <path d="M32 16 Q28 20 30 24 M32 16 Q36 20 34 24"/>
+          <path d="M16 17 L26 17 L26 27 L16 27 Z"/>
+          <path d="M21 17 L21 27 M16 22 L26 22"/>
+          <path d="M21 27 L21 30"/>
+        </g>
+      </defs>
+      <circle cx="168" cy="11" r="12" fill="#ffd34d" opacity=".2" stroke="none"/>
+      <path d="M168 0 L171 8 L179 11 L171 14 L168 22 L165 14 L157 11 L165 8 Z" fill="#ffd34d" stroke="none"/>
+      <path d="M30 8 L31 11.5 L34.5 12.5 L31 13.5 L30 17 L29 13.5 L25.5 12.5 L29 11.5 Z" fill="#ffd34d" stroke="none" opacity=".6"/>
+      <use href="#camel" transform="translate(2,31.4) scale(0.72)"/>
+      <use href="#camel" transform="translate(66,23.3) scale(0.85)"/>
+      <use href="#camel" transform="translate(130,14) scale(1)"/>
+      <path d="M6 76 L194 76"/>
+    </svg>
+    <svg class="star" viewBox="0 0 64 64" fill="#ffd34d" aria-hidden="true">
       <path d="M32 4l7.6 17.2L58 23.4l-13.4 12.3 3.6 18.3L32 44.6 15.8 54l3.6-18.3L6 23.4l18.4-2.2z"/>
     </svg>
     <div class="eyebrow">Daily Word 360</div>
@@ -212,7 +266,7 @@
     <div class="rule"></div>
     <p>One door a day, from December 1 to Christmas Day. A short Bible verse, a picture and a moment to share together — the story of Jesus, one day at a time.</p>
     <div class="count-pill" id="countdown">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#e9c767" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="#ffd34d" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
       <span id="countdown-text">Counting the days…</span>
     </div>
   </header>
