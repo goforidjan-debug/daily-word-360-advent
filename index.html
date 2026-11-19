@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Daily Word 360 Advent Calendar — 25 Days to Christmas</title>
-<meta name="description" content="A short Bible verse, a picture and a family moment behind every door. Open a door a day from December 1 to Christmas Day.">
+<meta name="description" content="A short Bible verse, a picture or a gold icon, and a family moment behind every door. Open a door a day from December 1 to Christmas Day.">
 <style>
   :root{
     --navy:#012636; --navy-2:#01303e; --navy-deep:#011b29; --navy-ink:#0b2f42;
@@ -259,7 +259,7 @@
     <div class="eyebrow">Daily Word 360</div>
     <h1>Advent Calendar<br><em>25 Days to Christmas</em></h1>
     <div class="rule"></div>
-    <p>A short Bible verse, a picture and a family moment behind every door.</p>
+    <p>A short Bible verse, a picture or a gold icon, and a family moment behind every door.</p>
     <div class="count-pill" id="countdown">
       <svg viewBox="0 0 24 24" fill="none" stroke="#0a2a3a" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
       <span id="countdown-text">Counting the days…</span>
@@ -280,8 +280,8 @@
 
   <section class="how">
     <h2>How it works</h2>
-    <div class="step"><span class="n">1</span><p><b>One door a day.</b> Each door unlocks on its own date in December — December 1 opens Door 1, December 2 opens Door 2, and so on to Christmas Day.</p></div>
-    <div class="step"><span class="n">2</span><p><b>Read it together.</b> Behind every door is a short Bible verse from the Christmas story, a picture, and one small thing to talk about as a family.</p></div>
+    <div class="step"><span class="n">1</span><p><b>One door a day.</b> Each door unlocks on its own date in December — December 1 opens Door 1, December 2 opens Door 2, and so on to Christmas Day. After Christmas, all 25 doors stay open so you can revisit them any time.</p></div>
+    <div class="step"><span class="n">2</span><p><b>Read it together.</b> Behind every door is a short Bible verse from the Christmas story, a picture or a gold icon, and one small thing to talk about as a family.</p></div>
     <div class="step"><span class="n">3</span><p><b>It remembers you.</b> Opened doors stay open on this device, so you never lose your place — even if you close the page.</p></div>
   </section>
 
@@ -372,10 +372,10 @@ var DOORS = [
    talk:"Draw a manger with a baby in it, and put it where everyone can see it."},
   {day:10, title:"Shepherds in the Fields", ref:"Luke 2:8",         icon:null, img:"images/day10-shepherd.jpg",
    verse:"And there were shepherds living out in the fields nearby, keeping watch over their flocks at night.",
-   talk:"A shepherd looks after sheep — just like Jesus looks after us."},
+   talk:"A shepherd looks after sheep — just like Jesus looks after us. How does Jesus look after you?"},
   {day:11, title:"The Angel Appears",      ref:"Luke 2:9",          icon:"angel",
    verse:"An angel of the Lord appeared to them, and the glory of the Lord shone around them, and they were terrified.",
-   talk:"The angel said, “Do not be afraid.” What are you afraid of? Tell God about it."},
+   talk:"The shepherds were terrified. What are you afraid of? Tell God about it."},
   {day:12, title:"Good News",              ref:"Luke 2:10",         icon:"bell",
    verse:"But the angel said to them, “Do not be afraid. I bring you good news that will cause great joy for all the people.”",
    talk:"Share one piece of good news with someone today."},
@@ -408,7 +408,7 @@ var DOORS = [
    talk:"The wise men traveled far to find Jesus. What would you travel far to see?"},
   {day:22, title:"Where Is the King?",     ref:"Matthew 2:2",       icon:"pin",
    verse:"and asked, “Where is the one who has been born king of the Jews? We saw his star when it rose and have come to worship him.”",
-   talk:"Follow a star: find the brightest star in tonight’s sky."},
+   talk:"Make a star: cut a star from gold paper and hang it where you can see it."},
   {day:23, title:"Overjoyed",              ref:"Matthew 2:10",      icon:"sparkles",
    verse:"When they saw the star, they were overjoyed.",
    talk:"What makes you overjoyed? Tell each other."},
@@ -417,7 +417,7 @@ var DOORS = [
    talk:"Give a small gift to someone today — just like the wise men did."},
   {day:25, title:"God With Us",            ref:"Matthew 1:23",      icon:"candle",
    verse:"“The virgin will conceive and give birth to a son, and they will call him Immanuel” (which means “God with us”).",
-   talk:"Merry Christmas! Read the whole story together from Luke 2."}
+   talk:"Merry Christmas! Read the Christmas story together from Luke 2."}
 ];
 
 /* ---------- State ---------- */
@@ -456,20 +456,24 @@ function renderCountdown(now){
   var year = now.getFullYear();
   var christmas = new Date(year, 11, 25);
   var diff = Math.ceil((christmas - now) / 86400000);
-  if (now.getMonth() < 10)       el.textContent = "Doors open again on December 1";
+  if (now.getMonth() < 10)       el.textContent = "All 25 doors are open — revisit them any time";
   else if (diff > 1)      el.textContent = diff + " days until Christmas";
   else if (diff === 1) el.textContent = "1 day until Christmas — tomorrow is the day!";
   else if (diff === 0) el.textContent = "Merry Christmas! Today is the day!";
   else               el.textContent = "Merry Christmas — all 25 doors are open!";
 }
-function renderProgress(){
+function renderProgress(now){
+  now = now || new Date();
+  var m = now.getMonth();
   var n = opened.length;
   document.getElementById("opened-count").textContent = n;
   document.getElementById("progress-fill").style.width = (n / 25 * 100) + "%";
   var note = document.getElementById("progress-note");
-  if (n === 0)      note.textContent = "Doors open one day at a time. Come back tomorrow for the next one.";
-  else if (n < 25)  note.textContent = "Beautiful — keep going. A new door opens every day until Christmas.";
-  else              note.textContent = "You opened every door. Merry Christmas from Daily Word 360!";
+  if (m < 10)                 note.textContent = "All 25 doors are open — revisit any door, any time.";
+  else if (m === 10)          note.textContent = "Doors open from December 1 — come back then!";
+  else if (n === 0)           note.textContent = "Doors open one day at a time. Come back tomorrow for the next one.";
+  else if (n < 25)            note.textContent = "Beautiful — keep going. A new door opens every day until Christmas.";
+  else                        note.textContent = "You opened every door. Merry Christmas from Daily Word 360!";
 }
 
 /* ---------- Doors grid ---------- */
